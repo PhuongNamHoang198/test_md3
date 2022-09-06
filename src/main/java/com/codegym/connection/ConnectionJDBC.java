@@ -19,9 +19,9 @@ public class ConnectionJDBC {
         return instance;
     }
 
-    private static final String URL = "jdbc:mysql://localhost:3306/finaltest";
+    private static final String URL = "jdbc:mysql://localhost:3306/FinalTestMD3";
     private static final String USER = "root";
-    private static final String PASSWORD = "123456";
+    private static final String PASSWORD = "88888888";
 
     public Connection getConnect() {
         if (connection == null) {
