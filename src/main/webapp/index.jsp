@@ -235,9 +235,9 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-8"><h2>Student <b>Details</b></h2></div>
-                    <div class="col-sm-8"><a href="/manager?action=create">Add Student</a></div>
+                    <div class="col-sm-8"><a href="/concat?action=create">Add Student</a></div>
                     <div class="col-sm-4">
-                        <form action="/manager?action=findName" method="post">
+                        <form action="/concat?action=findName" method="post">
                             <div class="search-box">
                                 <i class="material-icons">&#xE8B6;</i>
                                 <input type="text" class="form-control" placeholder="Search&hellip;" name="findName">
@@ -269,7 +269,7 @@
                     <td>${studentL.phone}</td>
                     <td>${studentL.email}</td>
                     <td>
-                        <a href="/manager?action=edit&id=${studentL.id}" class="edit" title="Edit" data-toggle="tooltip">
+                        <a href="/concat?action=edit&id=${studentL.id}" class="edit" title="Edit" data-toggle="tooltip">
                             <i class="material-icons">&#xE254;</i></a>
                         <a href="#myModal" class="delete trigger-btn" title="Delete" data-toggle="modal">
                             <i class="material-icons">&#xE872;</i></a>
@@ -279,7 +279,7 @@
 
                 <%--Modal--%>
                 <div id="myModal" class="modal fade">
-                    <form action="/manager?action=delete&id=${customer.id}" method="post">
+                    <form action="/concat?action=delete&id=${studentL.id}" method="post">
                         <div class="modal-dialog modal-confirm">
                             <div class="modal-content">
                                 <div class="modal-header flex-column">

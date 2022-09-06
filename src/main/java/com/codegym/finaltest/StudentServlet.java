@@ -7,11 +7,12 @@ import com.codegym.service.StudentDAO;
 import java.io.*;
 import java.sql.Date;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "StudentServlet", value = "/manager")
+@WebServlet(name = "StudentServlet", urlPatterns = "/concat")
 public class StudentServlet extends HttpServlet {
     IStudentDAO studentDAO = new StudentDAO();
 
@@ -25,14 +26,23 @@ public class StudentServlet extends HttpServlet {
                 showCreateForm(request,response);
                 break;
             case "edit":
+                showEditForm(request,response);
                 break;
             case "delete":
-
+                deleteStudent(request,response);
                 break;
             default:
                 showAllStudent(request,response);
                 break;
         }
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Student temp = studentDAO.findByID(id);
+        request.setAttribute("thisStu", temp);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("student/edit.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
@@ -56,14 +66,20 @@ public class StudentServlet extends HttpServlet {
                 createStudent(req, resp);
                 break;
             case "edit":
+
                 break;
             case "delete":
-
+                deleteStudent(req, resp);
                 break;
             default:
                 showAllStudent(req, resp);
                 break;
         }
+    }
+    private void deleteStudent(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        studentDAO.delete(id);
+        showAllStudent(request, response);
     }
 
     private void createStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

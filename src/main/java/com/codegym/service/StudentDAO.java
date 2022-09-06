@@ -17,6 +17,7 @@ public class StudentDAO implements IStudentDAO{
     private final String INSERT_STUDENT = "insert into student (name, birth, address, phone, email, class_id) values (?,?,?,?,?,?);";
     private final String DELETE_STUDENT = "update student set status = 'off' where id = ?;";
     private final String EDIT_STUDENT = "update student set name = ?, birth = ?,address = ?,phone=?,email=?,class_id=? where id = ?;";
+    private final String SELECT_STUDENT_BY_ID = "select * from student where id = ?;";
 
     @Override
     public List<Student> findAll() {
@@ -76,7 +77,30 @@ public class StudentDAO implements IStudentDAO{
     }
 
     @Override
-    public void delete(Student student) {
+    public void delete(int id) {
 
+    }
+
+    @Override
+    public Student findByID(int id) {
+        Student student = null;
+        try{
+            PreparedStatement statement = connection.prepareStatement(SELECT_STUDENT_BY_ID);
+            statement.setInt(1,id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                Date birth = rs.getDate("birth");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                String email = rs.getString("email");
+                int class_id = rs.getInt("class_id");
+                student = new Student(id,name,birth,address,phone,email,class_id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return student;
     }
 }
