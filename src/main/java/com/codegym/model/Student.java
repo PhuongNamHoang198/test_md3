@@ -1,11 +1,12 @@
 package com.codegym.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Student {
     private int id;
     private String name;
-    private LocalDate birth;
+    private Date birth;
     private String address;
     private String phone;
     private String email;
@@ -14,7 +15,16 @@ public class Student {
     public Student() {
     }
 
-    public Student(int id, String name, LocalDate birth, String address, String phone, String email, int class_id) {
+    public Student(int id, String name, Date birth, String address, String phone, String email) {
+        this.id = id;
+        this.name = name;
+        this.birth = birth;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public Student(int id, String name, Date birth, String address, String phone, String email, int class_id) {
         this.id = id;
         this.name = name;
         this.birth = birth;
@@ -40,11 +50,11 @@ public class Student {
         this.name = name;
     }
 
-    public LocalDate getBirth() {
+    public Date getBirth() {
         return birth;
     }
 
-    public void setBirth(LocalDate birth) {
+    public void setBirth(Date birth) {
         this.birth = birth;
     }
 
@@ -80,14 +90,25 @@ public class Student {
         this.class_id = class_id;
     }
 
-    public Student(String name, LocalDate birth, String address, String phone, String email, int class_id) {
+    public Student(String name, Date birth, String address, String phone, String email, int class_id) {
         this.name = name;
         this.birth = birth;
         this.address = address;
         this.phone = phone;
         this.email = email;
         this.class_id = class_id;
+    }
 
-
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", birth=" + birth +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", class_id=" + class_id +
+                '}';
     }
 }
